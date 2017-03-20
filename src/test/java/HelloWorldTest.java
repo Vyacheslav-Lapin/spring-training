@@ -1,26 +1,24 @@
-import lab.model.Country;
+import lab.model.SimpleCountry;
 import lab.model.Person;
 import lab.model.UsualPerson;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HelloWorldTest {
 
-	private static final String APPLICATION_CONTEXT_XML_FILE_NAME = "resources/application-context.xml";
+	private static final String APPLICATION_CONTEXT_XML_FILE_NAME = "application-context.xml";
 
 	private UsualPerson expectedPerson;
 
-	private AbstractApplicationContext context;
+	private BeanFactory context;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		context = new FileSystemXmlApplicationContext(
-				new String[] { APPLICATION_CONTEXT_XML_FILE_NAME });
+		context = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_XML_FILE_NAME);
 		expectedPerson = getExpectedPerson();
 	}
 
@@ -36,7 +34,7 @@ class HelloWorldTest {
 		person.setAge(35);
 		person.setName("John Smith");
 
-		Country country = new Country();
+		SimpleCountry country = new SimpleCountry();
 		country.setId(1);
 		country.setName("Russia");
 		country.setCodeName("RU");
@@ -44,11 +42,5 @@ class HelloWorldTest {
 		person.setCountry(country);
 
 		return person;
-	}
-	
-	@AfterEach
-	void tearDown() throws Exception{
-		if (context != null)
-			context.close();
 	}
 }

@@ -1,22 +1,9 @@
 package lab.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+public interface Country {
+    int getId();
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Country {
+    String getName();
 
-	private int id;
-
-    private String name;
-
-    private String codeName;
-
-    public Country(String name, String codeName) {
-        this.name = name;
-        this.codeName = codeName;
-    }
+    String getCodeName();
 }
