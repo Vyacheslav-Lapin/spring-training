@@ -1,30 +1,31 @@
-import static org.junit.Assert.* ;
-import org.junit.*;
-
+import lab.model.Country;
+import lab.model.Person;
+import lab.model.UsualPerson;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import lab.model.UsualPerson;
-import lab.model.Person;
-import lab.model.Country;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class HelloWorldTest {
+class HelloWorldTest {
 
-	protected static final String APPLICATION_CONTEXT_XML_FILE_NAME = "resources/application-context.xml";
+	private static final String APPLICATION_CONTEXT_XML_FILE_NAME = "resources/application-context.xml";
 
 	private UsualPerson expectedPerson;
 
 	private AbstractApplicationContext context;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeEach
+	void setUp() throws Exception {
 		context = new FileSystemXmlApplicationContext(
 				new String[] { APPLICATION_CONTEXT_XML_FILE_NAME });
 		expectedPerson = getExpectedPerson();
 	}
 
 	@Test
-	public void testInitPerson() {
+	void testInitPerson() {
 		UsualPerson person = (UsualPerson) context.getBean("person", Person.class);
 		assertEquals(expectedPerson, person);
 		System.out.println(person);
@@ -45,8 +46,8 @@ public class HelloWorldTest {
 		return person;
 	}
 	
-	@After
-	public void tearDown() throws Exception{
+	@AfterEach
+	void tearDown() throws Exception{
 		if (context != null)
 			context.close();
 	}
