@@ -1,0 +1,1 @@
+package com.luxoft.training.spring.demo;public class Address {    private String street;}
