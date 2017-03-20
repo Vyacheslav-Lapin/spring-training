@@ -1,9 +1,7 @@
 package lab.model;
 
 public interface Country {
-    int getId();
-
-    String getName();
-
-    String getCodeName();
+    int id();
+    String name();
+    String codeName();
 }
