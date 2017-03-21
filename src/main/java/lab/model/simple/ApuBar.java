@@ -5,13 +5,15 @@ import lab.aop.AopLog;
 import lab.model.Bar;
 import lab.model.Customer;
 import lab.model.Squishy;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ApuBar implements Bar {
 
     @Override
 	public Squishy sellSquishy(Customer customer)  {
 
-	    if (customer.isBroke())
+	    if (customer.broke())
             throw new CustomerBrokenException();
 
         AopLog.append("Here is your Squishy \n");
