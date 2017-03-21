@@ -1,38 +1,1 @@
-package configuration;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
-
-@Configuration
-@PropertySource("person.properties")
-@ImportResource(locations = "application-context.xml")
-@ComponentScan(basePackages = "lab.model")
-public class HelloWorldConfig {
-
-    @Autowired
-    Environment env;
-
-//    @Bean
-//    public Person person() {
-//        return new SimplePerson(
-//                Integer.parseInt(env.getProperty("id", "0")),
-//                env.getProperty("name", "John Doe"),
-//                Float.parseFloat(env.getProperty("height", "1.78f")),
-//                Integer.parseInt(env.getProperty("age")),
-//                env.getProperty("programmer").equalsIgnoreCase("true"));
-//    }
-
-//    @Bean
-//    public List<String> contacts() {
-//        return Arrays.asList("1", "asd@asd.ru", "+7-234-456-67-89");
-//    }
-
-//    @Bean
-//    public SimpleCountry country() {
-//        return new SimpleCountry(1, "Russia", "RU");
-//    }
-}
+package configuration;import lab.model.Country;import lab.model.Person;import lab.model.SimpleCountry;import lab.model.UsualPerson;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.context.annotation.*;import org.springframework.core.env.Environment;import java.util.Arrays;import java.util.List;@Configuration@PropertySource("person.properties")@ImportResource(locations = "application-context.xml")//@ComponentScan(basePackages = "lab.model")public class HelloWorldConfig {    @Autowired    private Environment env;    @Bean    public Person person() {        int id = Integer.parseInt(env.getProperty("id", "0"));        String name = env.getProperty("name", "John Doe");        int age = Integer.parseInt(env.getProperty("age", "35"));        float height = Float.parseFloat(env.getProperty("height", "1.78f"));        boolean isProgrammer = env.getProperty("programmer").equalsIgnoreCase("true");        List<String> contacts = contacts();        return new UsualPerson(                id,                name,                country(),                age,                height,                isProgrammer,                contacts);    }    @Bean    public List<String> contacts() {        return Arrays.asList("1", "asd@asd.ru", "+7-234-456-67-89");    }    @Bean    public Country country() {        return new SimpleCountry(1, "Russia", "RU");    }}

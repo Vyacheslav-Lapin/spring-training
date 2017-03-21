@@ -11,8 +11,8 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 ">
 
-    <context:annotation-config/>
-    <context:component-scan base-package="lab.model"/>
+    <!--<context:annotation-config/>-->
+    <!--<context:component-scan base-package="lab.model"/>-->
 
     <!--<bean id="person" class="lab.model.UsualPerson"-->
           <!--c:id="0"-->

@@ -1,3 +1,4 @@
+import configuration.HelloWorldConfig;
 import lab.model.Person;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:application-context.xml")
+@ContextConfiguration(classes = HelloWorldConfig.class)
 class SpringTCFAppTest {
 
     @Autowired
