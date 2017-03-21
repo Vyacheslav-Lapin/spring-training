@@ -4,13 +4,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+">
 
     <util:list id="contacts" value-type="java.lang.String">
         <value>222-33-22</value>
         <value>333-22-33</value>
     </util:list>
-
-    <!--<util:properties location="-->
 
 </beans>

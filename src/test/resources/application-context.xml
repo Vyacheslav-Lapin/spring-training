@@ -15,7 +15,7 @@
           c:id="0"
           c:name="John Smith"
           c:age="35"
-          c:country-ref="country"
+          c:country-ref="russia"
           c:contacts-ref="contacts"
           c:isProgrammer="true"
           c:height="1.78f"/>
@@ -24,4 +24,7 @@
           c:id="1"
           c:name="Russia"
           c:codeName="RU"/>
+
+    <alias alias="russia" name="country"/>
+
 </beans>
