@@ -26,7 +26,7 @@ class HelloWorldTest {
 
     @Test
     void testInitPerson() {
-        val person = context.getBean(Person.class);
+        val person = context.getBean("person", Person.class);
         assertEquals(expectedPerson, person);
     }
 }

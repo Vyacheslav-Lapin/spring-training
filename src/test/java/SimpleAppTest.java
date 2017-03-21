@@ -13,6 +13,6 @@ class SimpleAppTest {
 
 	@Test
 	void testInitPerson() {
-		assertEquals(expectedPerson, context.getBean(/*"person",*/ Person.class));
+		assertEquals(expectedPerson, context.getBean("person", Person.class));
 	}
 }
