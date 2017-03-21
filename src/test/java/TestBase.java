@@ -4,7 +4,7 @@ import lab.model.UsualPerson;
 
 import java.util.Arrays;
 
-public class TestBase {
+interface TestBase {
 
     static Person getExpectedPerson() {
         return new UsualPerson(

@@ -8,8 +8,8 @@
 ">
 
     <util:list id="contacts" value-type="java.lang.String">
-        <value>222-33-22</value>
-        <value>333-22-33</value>
+        <value>asd@asd.ru</value>
+        <value>+7-234-456-67-89</value>
     </util:list>
 
 </beans>

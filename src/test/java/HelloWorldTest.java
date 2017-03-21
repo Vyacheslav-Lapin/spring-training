@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class HelloWorldTest {
 
     private static final String APPLICATION_CONTEXT_XML_FILE_NAME = "application-context.xml";
-    private static final String CONTACTS_XML_FILE_NAME = "contacts.xml";
 
     private Person expectedPerson;
 
@@ -19,8 +18,7 @@ class HelloWorldTest {
     @BeforeEach
     void setUp() throws Exception {
         context = new ClassPathXmlApplicationContext(
-                APPLICATION_CONTEXT_XML_FILE_NAME,
-                CONTACTS_XML_FILE_NAME
+                APPLICATION_CONTEXT_XML_FILE_NAME
         );
 
         expectedPerson = TestBase.getExpectedPerson();

@@ -11,20 +11,25 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 ">
 
-    <bean id="person" class="lab.model.UsualPerson"
-          c:id="0"
-          c:name="John Smith"
-          c:age="35"
-          c:country-ref="russia"
-          c:contacts-ref="contacts"
-          c:isProgrammer="true"
-          c:height="1.78f"/>
+    <context:annotation-config/>
+    <context:component-scan base-package="lab.model"/>
 
-    <bean id="country" class="lab.model.SimpleCountry"
-          c:id="1"
-          c:name="Russia"
-          c:codeName="RU"/>
+    <!--<bean id="person" class="lab.model.UsualPerson"-->
+          <!--c:id="0"-->
+          <!--c:name="John Smith"-->
+          <!--c:age="35"-->
+          <!--c:country-ref="russia"-->
+          <!--c:contacts-ref="contacts"-->
+          <!--c:isProgrammer="true"-->
+          <!--c:height="1.78"/>-->
 
-    <alias alias="russia" name="country"/>
+    <!--<bean id="country" class="lab.model.SimpleCountry"-->
+          <!--c:id="1"-->
+          <!--c:name="Russia"-->
+          <!--c:codeName="RU"/>-->
+
+    <!--<alias alias="russia" name="country"/>-->
+
+    <import resource="contacts.xml"/>
 
 </beans>

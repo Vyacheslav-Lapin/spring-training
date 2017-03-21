@@ -5,20 +5,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration("classpath:application-context.xml")
-public class SpringTCFAppTest {
-	
-	@Autowired
-	private Person person;
+class SpringTCFAppTest {
 
-	private Person expectedPerson = TestBase.getExpectedPerson();
+    @Autowired
+    private Person person;
 
-	@Test
-	public void testInitPerson() {
-		assertEquals(expectedPerson, person);
-	}
+    private Person expectedPerson =
+            TestBase.getExpectedPerson();
+
+    @Test
+    void testInitPerson() {
+        assertThat(person, is(expectedPerson));
+    }
 
 }
