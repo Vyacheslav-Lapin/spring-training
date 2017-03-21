@@ -3,6 +3,7 @@ package lab.model.simple;
 import lab.model.Country;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
+@EqualsAndHashCode(exclude = "id")
 public class SimpleCountry implements Country {
 
     @Value("1")

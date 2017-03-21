@@ -17,7 +17,7 @@
     <context:annotation-config/>
     <context:component-scan base-package="lab"/>
 
-    <jdbc:embedded-database id="dataSource">
+    <jdbc:embedded-database id="dataSource" type="H2">
         <jdbc:script location="classpath:db-schema.sql"/>
     </jdbc:embedded-database>
 

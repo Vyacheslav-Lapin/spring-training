@@ -31,7 +31,6 @@ class JdbcTest {
         initExpectedCountryLists();
         countryDao.loadCountries();
     }
-
     
     @Test
     @DirtiesContext
@@ -47,7 +46,8 @@ class JdbcTest {
     @Test
     @DirtiesContext
     void testCountryListStartsWithA() {
-        List<Country> countryList = countryDao.getCountryListStartWith("A");
+        List<Country> countryList =
+            countryDao.getCountryListStartWith("A");
         assertNotNull(countryList);
         assertEquals(expectedCountryListStartsWithA.size(), countryList.size());
         for (int i = 0; i < expectedCountryListStartsWithA.size(); i++) {
@@ -65,9 +65,9 @@ class JdbcTest {
     private void initExpectedCountryLists() {
          for (int i = 0; i < CountryDao.COUNTRY_INIT_DATA.length; i++) {
              String[] countryInitData = CountryDao.COUNTRY_INIT_DATA[i];
-             Country country = new Country(i, countryInitData[0], countryInitData[1]);
+             Country country = new SimpleCountry(i + 1, countryInitData[0], countryInitData[1]);
              expectedCountryList.add(country);
-             if (country.getName().startsWith("A")) {
+             if (country.name().startsWith("A")) {
                  expectedCountryListStartsWithA.add(country);
              }
          }

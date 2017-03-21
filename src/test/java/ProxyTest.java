@@ -19,7 +19,7 @@ public class ProxyTest {
     void name() {
         Messanger proxyMessanger = (Messanger) Proxy.newProxyInstance(
                 ProxyTest.class.getClassLoader(),
-                new Class<?>[]{Messanger.class},
+                new Class<?>[]{ Messanger.class },
                 (proxy, method, args) -> {
                     if (method.getDeclaringClass() == Object.class)
                         switch (method.getName()) {
