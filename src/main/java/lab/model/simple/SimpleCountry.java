@@ -1,5 +1,6 @@
-package lab.model;
+package lab.model.simple;
 
+import lab.model.Country;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

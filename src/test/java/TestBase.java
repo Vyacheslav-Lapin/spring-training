@@ -1,6 +1,6 @@
 import lab.model.Person;
-import lab.model.SimpleCountry;
-import lab.model.UsualPerson;
+import lab.model.simple.SimpleCountry;
+import lab.model.simple.UsualPerson;
 
 import java.util.Arrays;
 
