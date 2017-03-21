@@ -23,5 +23,4 @@ class SpringTCFAppTest {
     void testInitPerson() {
         assertThat(person, is(expectedPerson));
     }
-
 }
