@@ -1,1 +1,65 @@
-group 'com.luxoft.training.spring'version '1.0-SNAPSHOT'apply plugin: 'java'sourceCompatibility = 1.8repositories {    maven { url 'http://repo.spring.io/libs-milestone' }    maven { url 'http://repo.spring.io/libs-release' }    mavenCentral()    jcenter()    mavenLocal()    maven { url 'https://jitpack.io' }}configurations {    testCompile.extendsFrom compileOnly}dependencies {    compile 'org.springframework:spring-context:+',//            'org.springframework:spring-context-support:+',            // AOP            'aopalliance:aopalliance:+',            'org.aspectj:aspectjrt:+',            'org.aspectj:aspectjweaver:+',            // Spring JDBC            'com.h2database:h2:+',            'org.springframework:spring-jdbc:+',            // Spring Data JDBC Extensions//            'org.springframework.data:spring-data-oracle:+',            // ORM            'org.hibernate:hibernate-entitymanager:+',//            'javax.transaction:jta:+',            // Commons            'log4j:log4j:+'//,//            'io.javaslang:javaslang:+',//            'com.github.Vyacheslav-Lapin:Hegel:master-SNAPSHOT',//            'ch.qos.logback:logback-classic:+',//            'org.codehaus.groovy:groovy-all:+'    compileOnly 'org.projectlombok:lombok:+'//,//            'edu.washington.cs.types.checker:checker-framework:+'    testCompile 'org.junit.jupiter:junit-jupiter-api:+',            'org.hamcrest:java-hamcrest:+',            'org.springframework:spring-test:+'}task wrapper(type: Wrapper) {    gradleVersion = '3.4'}
+group 'com.epam.trainings.lab.spring'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven { url 'http://repo.spring.io/libs-milestone' }
+    maven { url 'http://repo.spring.io/libs-release' }
+    mavenCentral()
+    jcenter()
+    mavenLocal()
+    maven { url 'https://jitpack.io' }
+}
+
+configurations {
+    testCompile.extendsFrom compileOnly
+}
+
+// this turns logging on in tests:
+test.testLogging.showStandardStreams = true
+
+dependencies {
+    compile 'org.springframework:spring-context:+',
+
+            // AOP
+            'org.aspectj:aspectjrt:+',
+            'aopalliance:aopalliance:+',
+            'org.aspectj:aspectjweaver:+',
+
+            // JDBC
+            'com.h2database:h2:+',
+            'org.springframework:spring-jdbc:+',
+
+            // Spring Data JDBC Extensions
+            'org.springframework.data:spring-data-oracle:+',
+
+            // ORM
+            'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:+',
+            'org.hibernate:hibernate-entitymanager:4.0.1.Final',
+            'org.hibernate:hibernate-core:4.0.1.Final',
+            'org.springframework:spring-orm:+',
+            'javax.transaction:jta:+',
+
+            // Common
+            'ch.qos.logback:logback-classic:+',
+            'io.javaslang:javaslang:+',
+            'com.aol.simplereact:cyclops-react:+',
+//            'com.github.Vyacheslav-Lapin:Hegel:master-SNAPSHOT',
+            'org.codehaus.groovy:groovy-all:+'
+
+
+    compileOnly 'org.projectlombok:lombok:+'//,
+//            'edu.washington.cs.types.checker:checker-framework:+'
+
+    testCompile 'org.junit.jupiter:junit-jupiter-api:+',
+            'org.hamcrest:java-hamcrest:+',
+            'org.springframework:spring-test:+'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.4'
+}

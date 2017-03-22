@@ -1,52 +1,38 @@
 package lab.aop;
 
-import lab.model.Customer;
-import lab.model.simple.SimpleSquishy;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.springframework.stereotype.Component;
+import lab.model.Customer;
+import lab.model.Squishy;
 
 @Aspect
-@Component
 public class Politeness {
 
-    @Pointcut("execution(* sellSquishy(..))")
-    public void sellSquishy() {
-//        throw new UnsupportedOperationException();
-    }
-
-    @Before("sellSquishy()")
+    @Before("execution(* sellSquishee(lab.model.Customer, ..))")
     public void sayHello(JoinPoint joinPoint) {
-        AopLog.append(
-                "Hello %s. How are you doing?\n",
-                ((Customer) joinPoint.getArgs()[0]).name()
-        );
+        String customerName = ((Customer) joinPoint.getArgs()[0]).getName();
+        AopLog.printf("Hello %s. How are you doing?%n", customerName);
     }
 
-    @AfterReturning(
-            pointcut = "sellSquishy()",
-            returning = "retVal",
-            argNames = "retVal"
-    )
+    @AfterReturning(pointcut = "execution(* sellSquishee(..))",
+            returning = "retVal", argNames = "retVal")
     public void askOpinion(Object retVal) {
-        AopLog.append(
-                "Is %s Good Enough?\n",
-                ((SimpleSquishy) retVal).getName()
-        );
+        String name = ((Squishy) retVal).getName();
+        AopLog.printf("Is %s Good Enough?%n", name);
     }
 
-    @AfterThrowing("sellSquishy()")
+    @AfterThrowing("execution(* sellSquishee(..))")
     public void sayYouAreNotAllowed() {
         AopLog.append("Hmmm...\n");
     }
 
-    @After("sellSquishy()")
+    @After("execution(* sellSquishee(..))")
     public void sayGoodBye() {
         AopLog.append("Good Bye!\n");
     }
 
-    @Around("sellSquishy()")
+    @Around("execution(* sellSquishee(..))")
     public Object sayPoliteWordsAndSell(ProceedingJoinPoint pjp) throws Throwable {
         AopLog.append("Hi!\n");
         Object retVal = pjp.proceed();

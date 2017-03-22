@@ -1,14 +1,11 @@
 package lab.aop;
 
 public class AopLog {
+    private static StringBuffer value = new StringBuffer();
 
-    private static StringBuilder value = new StringBuilder();
-
-    @SuppressWarnings({"WeakerAccess", "SameParameterValue"})
-    public static void append(String str, Object... args) {
-        append(String.format(str, args));
+    public static void printf(String pattern, Object... params) {
+        append(String.format(pattern, params));
     }
-
     public static void append(String str){
         value.append(str);
     }
@@ -18,6 +15,6 @@ public class AopLog {
     }
 
     public static void clear(){
-        value = new StringBuilder();
+        value = new StringBuffer();
     }
 }

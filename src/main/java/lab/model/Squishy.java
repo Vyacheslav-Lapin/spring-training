@@ -1,5 +1,8 @@
 package lab.model;
 
-public interface Squishy {
-    String getName();
+import lombok.Value;
+
+@Value
+public class Squishy {
+    private String name;
 }
