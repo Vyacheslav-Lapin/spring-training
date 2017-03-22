@@ -5,27 +5,38 @@ import javaslang.control.Try;
 import lab.dao.CountryDao;
 import lab.model.Country;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceUnit;
 import java.util.List;
 
 @Repository
 public class CountryJpaDaoImpl extends AbstractJpaDao implements CountryDao {
 
+    @PersistenceUnit
+    EntityManager entityManager;
+
     @Override
+    @Transactional
     public void save(Country country) {
-        CheckedFunction0.liftTry(emf::createEntityManager)
-                .andThen(Try::get)
-                .andThen(entityManager ->
-                        CheckedFunction0.liftTry(entityManager::getTransaction)
-                                .andThen(Try::get)
-                                .andThen(entityTransaction -> {
-                                    entityTransaction.begin();
-                                    entityManager.persist(country);
-                                    entityTransaction.commit();
-                                    entityManager.close();
-                                    return null;
-                                }).get()
-                ).get();
+//        EntityManager entityManager = null;
+//        EntityTransaction transaction = null;
+//        try {
+//            entityManager = emf.createEntityManager();
+//            transaction = entityManager.getTransaction();
+//            transaction.begin();
+            entityManager.persist(country);
+//            transaction.commit();
+//        } catch (RuntimeException e) {
+//            if (transaction != null) {
+//                transaction.rollback();
+//            }
+//        }
+//        finally {
+//            if (entityManager != null)
+//                entityManager.close();
+//        }
     }
 
     @Override

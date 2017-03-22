@@ -35,7 +35,7 @@ dependencies {
             'org.springframework:spring-jdbc:+',
 
             // Spring Data JDBC Extensions
-            'org.springframework.data:spring-data-oracle:+',
+//            'org.springframework.data:spring-data-oracle:+',
 
             // ORM
             'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:+',
@@ -47,9 +47,9 @@ dependencies {
             // Common
             'ch.qos.logback:logback-classic:+',
             'io.javaslang:javaslang:+',
-            'com.aol.simplereact:cyclops-react:+',
+//            'com.aol.simplereact:cyclops-react:+',
 //            'com.github.Vyacheslav-Lapin:Hegel:master-SNAPSHOT',
-            'org.codehaus.groovy:groovy-all:+'
+//            'org.codehaus.groovy:groovy-all:+'
 
 
     compileOnly 'org.projectlombok:lombok:+'//,
