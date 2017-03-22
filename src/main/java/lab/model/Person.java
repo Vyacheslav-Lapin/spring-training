@@ -1,7 +1,10 @@
 package lab.model;
 
-public interface Person {
-    Person name(String name);
+public interface Person extends DbEntity {
+
     String name();
-    void sayHello(Person person);
+
+    default void sayHello(Person person) {
+        System.out.printf("Hello, %s", person.name());
+    }
 }

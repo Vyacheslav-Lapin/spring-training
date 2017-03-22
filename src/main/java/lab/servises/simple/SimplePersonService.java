@@ -1,14 +1,16 @@
-package lab.servises;
+package lab.servises.simple;
 
 import lab.dao.PersonDao;
 import lab.model.Person;
+import lab.servises.PersonService;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SimplePersonService implements PersonService {
 
-    @Autowired
+    @Setter(onMethod = @__(@Autowired))
     private PersonDao personDao;
 
     @Override

@@ -1,4 +1,4 @@
-import lab.dao.CountryDao;
+import lab.dao.jdbc.JdbcCountryDao;
 import lab.model.Country;
 import lab.model.simple.SimpleCountry;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class JdbcTest {
 
 	@Autowired
-	private CountryDao countryDao;
+	private JdbcCountryDao countryDao;
 	
     private List<Country> expectedCountryList = new ArrayList<>();
     private List<Country> expectedCountryListStartsWithA = new ArrayList<>();
@@ -35,7 +35,7 @@ class JdbcTest {
     @Test
     @DirtiesContext
     void testCountryList() {
-        List<Country> countryList = countryDao.getCountryList();
+        List<Country> countryList = countryDao.getAll();
         assertNotNull(countryList);
         assertEquals(expectedCountryList.size(), countryList.size());
         for (int i = 0; i < expectedCountryList.size(); i++) {
@@ -63,8 +63,8 @@ class JdbcTest {
     }
 
     private void initExpectedCountryLists() {
-         for (int i = 0; i < CountryDao.COUNTRY_INIT_DATA.length; i++) {
-             String[] countryInitData = CountryDao.COUNTRY_INIT_DATA[i];
+         for (int i = 0; i < JdbcCountryDao.COUNTRY_INIT_DATA.length; i++) {
+             String[] countryInitData = JdbcCountryDao.COUNTRY_INIT_DATA[i];
              Country country = new SimpleCountry(i + 1, countryInitData[0], countryInitData[1]);
              expectedCountryList.add(country);
              if (country.name().startsWith("A")) {

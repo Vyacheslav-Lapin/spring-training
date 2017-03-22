@@ -2,22 +2,14 @@ package lab.dao;
 
 import lab.model.Country;
 import lab.model.simple.SimpleCountry;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.stream.Stream;
 
-public class CountryDao extends NamedParameterJdbcDaoSupport {
-    private static final String LOAD_COUNTRIES_SQL = "INSERT INTO country (name, code_name) VALUES ('%s', '%s');";
-    private static final String GET_ALL_COUNTRIES_SQL = "SELECT * FROM country";
-    private static final String GET_COUNTRIES_BY_NAME_SQL = "SELECT * FROM country WHERE name LIKE :name";
-    private static final String GET_COUNTRY_BY_NAME_SQL = "SELECT * FROM country WHERE name = '%s'";
-    private static final String GET_COUNTRY_BY_CODE_NAME_SQL = "SELECT * FROM country WHERE code_name = '%s'";
-    private static final String UPDATE_COUNTRY_NAME_SQL = "UPDATE country SET name='%s' WHERE code_name='%s'";
+public interface CountryDao extends DbEntityDao<Country> {
 
-    public static final String[][] COUNTRY_INIT_DATA = {
+    String[][] COUNTRY_INIT_DATA = {
             {"Australia", "AU"},
             {"Canada", "CA"},
             {"France", "FR"},
@@ -32,62 +24,31 @@ public class CountryDao extends NamedParameterJdbcDaoSupport {
             {"United States", "US"}
     };
 
-    private static final RowMapper<Country> COUNTRY_ROW_MAPPER =
-            (resultSet, i) -> new SimpleCountry(
-                    resultSet.getInt("id"),
-                    resultSet.getString("name"),
-                    resultSet.getString("code_name"));
-
-    public List<Country> getCountryList() {
-        return getJdbcTemplate().query(GET_ALL_COUNTRIES_SQL, COUNTRY_ROW_MAPPER);
+    default Stream<Country> getCountryListStartWith(String namePrefix) {
+        return getAll()
+                .filter(country -> country.name().startsWith(namePrefix));
     }
 
-    public List<Country> getCountryListStartWith(String name) {
-        SqlParameterSource sqlParameterSource = new MapSqlParameterSource(
-                "name", name + "%");
-        return getNamedParameterJdbcTemplate().query(
-                GET_COUNTRIES_BY_NAME_SQL,
-                sqlParameterSource,
-                COUNTRY_ROW_MAPPER);
+    default void updateCountryName(String codeName, String newCountryName) {
+        getCountryByCodeName(codeName)
+                .ifPresent(country -> update(country.name(newCountryName)));
     }
 
-    public void updateCountryName(String codeName, String newCountryName) {
-        getJdbcTemplate().update(
-                String.format(
-                        UPDATE_COUNTRY_NAME_SQL,
-                        newCountryName,
-                        codeName
-                ));
+    default void loadCountries() {
+        Arrays.stream(COUNTRY_INIT_DATA)
+                .map(strings -> new SimpleCountry(strings[0], strings[1]))
+                .forEachOrdered(this::attach);
     }
 
-    public void loadCountries() {
-        for (String[] countryData : COUNTRY_INIT_DATA) {
-            String sql = String.format(
-                    LOAD_COUNTRIES_SQL,
-                    countryData[0],
-                    countryData[1]);
-
-            getJdbcTemplate().execute(sql);
-        }
+    default Optional<Country> getCountryByCodeName(String codeName) {
+        return getAll()
+                .filter(country -> country.codeName().equals(codeName))
+                .findAny();
     }
 
-    public Country getCountryByCodeName(String codeName) {
-        String sql = String.format(GET_COUNTRY_BY_CODE_NAME_SQL, codeName);
-        return getJdbcTemplate().query(sql, COUNTRY_ROW_MAPPER).get(0);
-    }
-
-    public Country getCountryByName(String name) throws CountryNotFoundException {
-
-        List<Country> countryList = getJdbcTemplate().query(
-                String.format(
-                        GET_COUNTRY_BY_NAME_SQL,
-                        name),
-                COUNTRY_ROW_MAPPER);
-
-        if (countryList.isEmpty()) {
-            throw new CountryNotFoundException();
-        }
-
-        return countryList.get(0);
+    default Optional<Country> getCountryByName(String name) {
+        return getAll()
+                .filter(country -> country.name().equals(name))
+                .findAny();
     }
 }

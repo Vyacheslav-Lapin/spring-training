@@ -1,7 +1,7 @@
 package lab.aop;
 
 import lab.model.Customer;
-import lab.model.Squishy;
+import lab.model.simple.SimpleSquishy;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -32,7 +32,7 @@ public class Politeness {
     public void askOpinion(Object retVal) {
         AopLog.append(
                 "Is %s Good Enough?\n",
-                ((Squishy) retVal).getName()
+                ((SimpleSquishy) retVal).getName()
         );
     }
 
